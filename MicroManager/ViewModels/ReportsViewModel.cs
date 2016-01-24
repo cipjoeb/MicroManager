@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
 using Interfaces;
 using Library;
@@ -24,7 +23,9 @@ namespace MicroManager.ViewModels
         public ICommand PrintReportCommand { get; set; }
         public ICommand CloseCommand { get; set; }
 
-        public ObservableCollection<string> Files { get; set; } 
+        public ObservableCollection<string> Files { get; set; }
+        public string ReportText { get; set; }
+        private List<string> _reportLines; 
 
         public ReportsViewModel()
         {
@@ -47,19 +48,17 @@ namespace MicroManager.ViewModels
             {
                 Files.Add(file);
             }
+            _reportLines = GenerateReport();
+            ReportText = string.Join(Environment.NewLine, _reportLines);
         }
 
-        private void PrintReport()
+        private List<string> GenerateReport()
         {
-            if (!Files.Any()) return;
+            if (!Files.Any()) return null;
             var fileHelper = new FileHelper();
-            var printDialog = new PrintDialog();
-            var result = printDialog.ShowDialog();
-            if (!result.Value) return;
-
             var days = Files.Select(fileHelper.GetEntries).ToList();
             var lines = new List<string>();
-            var runningTotal = new TimeSpan(0,0,0,0);
+            var runningTotal = new TimeSpan(0, 0, 0, 0);
             foreach (var d in days)
             {
                 lines.AddRange(d.Select(entry => entry.ToString()));
@@ -74,9 +73,17 @@ namespace MicroManager.ViewModels
             lines.Add(string.Format("---- Total Time For All Days Selected ---- {0}:{1}:{2} ---------------",
                 runningTotal.Hours, runningTotal.Minutes,
                 runningTotal.Seconds));
+            return lines;
+        }
 
+        private void PrintReport()
+        {
+            if (!Files.Any()) return;
+            var printDialog = new PrintDialog();
+            var result = printDialog.ShowDialog();
+            if (!result.Value) return;
             var reportFile = string.Format("{0}-Report.txt", DateTime.Now.ToString("yyyy-MM-dd"));
-            FileHelper.WriteFile(lines, reportFile);
+            FileHelper.WriteFile(ReportText, reportFile);
             PrintReportFile(string.Format("{0}\\{1}", FileHelper.GetPath(), reportFile));
         }
 

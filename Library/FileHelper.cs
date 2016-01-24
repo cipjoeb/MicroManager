@@ -23,6 +23,13 @@ namespace Library
             return true;
         }
 
+        public static bool WriteFile(string text, string fileName)
+        {
+            var theFile = string.Format("{0}\\{1}", GetPath(), fileName);
+            File.WriteAllText(theFile, text);
+            return true;
+        }
+
         public bool WriteEntries(ObservableCollection<TimeEntry> entries)
         {
             CheckDirectory();

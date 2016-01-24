@@ -9,12 +9,14 @@ namespace MicroManager.ViewModels
         public ICommand ChooseFilesCommand { get; set; }
         public ICommand PrintReportCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public string ReportText { get; set; }
 
         public ReportsDesignTimeViewModel()
         {
             ChooseFilesCommand = new RelayCommand(() => { });
             PrintReportCommand = new RelayCommand(() => { });
             CloseCommand = new RelayCommand(() => { });
+            ReportText = "Your report here.";
         }
     }
 }
