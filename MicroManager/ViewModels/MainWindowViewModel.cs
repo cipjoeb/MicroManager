@@ -37,6 +37,8 @@ namespace MicroManager.ViewModels
 
         public void Save()
         {
+            if(ClockInCommand == null)
+                ClockOut();
             _fileHelper.WriteEntries(TimeEntries);
         }
 
