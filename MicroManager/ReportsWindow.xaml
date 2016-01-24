@@ -6,7 +6,7 @@
         xmlns:designhelpers="clr-namespace:MicroManager.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance designhelpers:ReportsDesignTimeViewModel, IsDesignTimeCreatable=True}"
-        Title="ReportsWindow" WindowStyle="None" BorderThickness="1" BorderBrush="White" ResizeMode="NoResize" Height="400" Width="700" WindowStartupLocation="CenterScreen">
+        Title="ReportsWindow" WindowStyle="None" BorderThickness="1" BorderBrush="White" ResizeMode="NoResize" Height="400" Width="700" WindowStartupLocation="CenterScreen" MouseDown="ReportsWindow_OnMouseDown">
     <Window.Resources>
         <ResourceDictionary Source="Theme/Basic.xaml"></ResourceDictionary>
     </Window.Resources>

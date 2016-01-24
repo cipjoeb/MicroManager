@@ -59,6 +59,7 @@ namespace MicroManager.ViewModels
 
             var days = Files.Select(fileHelper.GetEntries).ToList();
             var lines = new List<string>();
+            var runningTotal = new TimeSpan(0,0,0,0);
             foreach (var d in days)
             {
                 lines.AddRange(d.Select(entry => entry.ToString()));
@@ -66,14 +67,20 @@ namespace MicroManager.ViewModels
                 var minutes = d.Sum(te => te.Minutes);
                 var seconds = d.Sum(te => te.Seconds);
                 var ts = new TimeSpan(0, hours, minutes, seconds);
-                lines.Add(string.Format("---- Total Time ---- {0}:{1}:{2} ---------------", ts.Hours, ts.Minutes,
+                runningTotal = runningTotal.Add(ts);
+                lines.Add(string.Format("---- Total Time For Day ---- {0}:{1}:{2} ---------------", ts.Hours, ts.Minutes,
                     ts.Seconds));
             }
+            lines.Add(string.Format("---- Total Time For All Days Selected ---- {0}:{1}:{2} ---------------",
+                runningTotal.Hours, runningTotal.Minutes,
+                runningTotal.Seconds));
+
             var reportFile = string.Format("{0}-Report.txt", DateTime.Now.ToString("yyyy-MM-dd"));
             FileHelper.WriteFile(lines, reportFile);
             PrintReportFile(string.Format("{0}\\{1}", FileHelper.GetPath(), reportFile));
         }
 
+        //Modified from source provided at http://stackoverflow.com/questions/18287153/printing-a-note-pad-text-file
         private static void PrintReportFile(string file)
         {
             var printFont = new Font("Arial", 10);
