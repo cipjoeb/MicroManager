@@ -15,8 +15,7 @@ namespace MicroManager.ViewModels
     {
         public ICommand ClockInCommand { get; set; }
         public ICommand ClockOutCommand { get; set; }
-        public ICommand GoOnBreakCommand { get; set; }
-        public ICommand BackToWorkCommand { get; set; }
+        public ICommand ChangeTaskCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public string Description { get; set; }
         public ObservableCollection<TimeEntry> TimeEntries { get; set; }
@@ -54,17 +53,25 @@ namespace MicroManager.ViewModels
                 Start = DateTime.Now,
                 Description = Description
             };
+            ChangeTaskCommand = new RelayCommand(ChangeTask);
             ClockOutCommand = new RelayCommand(ClockOut);
         }
 
         private void ClockOut()
         {
             ClockOutCommand = null;
+            ChangeTaskCommand = null;
             ClockInCommand = new RelayCommand(ClockIn);
             _entry.Stop = DateTime.Now;
             TimeEntries.Add(_entry);
             SetElapsed();
             _entry = null;
+        }
+
+        private void ChangeTask()
+        {
+            ClockOut();
+            ClockIn();
         }
 
         private void SetElapsed()

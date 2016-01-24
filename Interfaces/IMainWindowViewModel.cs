@@ -8,8 +8,7 @@ namespace Interfaces
     {
         ICommand ClockInCommand { get; set; }
         ICommand ClockOutCommand { get; set; }
-        ICommand GoOnBreakCommand { get; set; }
-        ICommand BackToWorkCommand { get; set; }
+        ICommand ChangeTaskCommand { get; set; }
         ICommand CloseCommand { get; set; }
         string Description { get; set; }
         ObservableCollection<TimeEntry> TimeEntries { get; set; }
