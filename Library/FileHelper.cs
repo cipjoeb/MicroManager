@@ -29,7 +29,13 @@ namespace Library
             if (!File.Exists(theFile)) return null;
             var lines = File.ReadAllLines(theFile);
             var serializer = new JavaScriptSerializer();
-            return lines.Select(serializer.Deserialize<TimeEntry>).ToList();
+            var theList = lines.Select(serializer.Deserialize<TimeEntry>).ToList();
+            foreach (var entry in theList)
+            {
+                entry.Start = entry.Start.ToLocalTime();
+                entry.Stop = entry.Stop.ToLocalTime();
+            }
+            return theList;
         }
 
         private string GetFileName()

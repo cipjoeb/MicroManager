@@ -6,7 +6,7 @@
         xmlns:designhelpers="clr-namespace:MicroManager.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance designhelpers:MainWindowDesignTimeViewModel, IsDesignTimeCreatable=True}"
-        Title="Micro Manager" WindowStyle="None" BorderThickness="1" BorderBrush="White" ResizeMode="NoResize" Height="350" Width="550" MouseDown="MainWindow_OnMouseDown">
+        Title="Micro Manager" WindowStyle="None" BorderThickness="1" BorderBrush="White" ResizeMode="CanResizeWithGrip" MinHeight="350" MinWidth="550" MouseDown="MainWindow_OnMouseDown" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <ResourceDictionary Source="Theme/Basic.xaml"></ResourceDictionary>
     </Window.Resources>

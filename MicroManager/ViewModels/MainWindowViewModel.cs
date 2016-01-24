@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Interfaces;
@@ -29,10 +30,13 @@ namespace MicroManager.ViewModels
             _fileHelper = new FileHelper();
             ClockInCommand = new RelayCommand(ClockIn);
             TimeEntries = new ObservableCollection<TimeEntry>();
-            var entries = _fileHelper.GetEntries();
-            if (entries != null)
-                entries.ForEach(e => TimeEntries.Add(e));
-            SetElapsed();
+            new Thread(() =>
+            {
+                var entries = _fileHelper.GetEntries();
+                if (entries != null)
+                    entries.ForEach(e => TimeEntries.Add(e));
+                SetElapsed();
+            }){IsBackground = true}.Start();
         }
 
         public void Save()
