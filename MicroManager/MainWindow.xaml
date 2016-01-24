@@ -23,6 +23,7 @@
                     <RowDefinition Height="20"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -37,12 +38,13 @@
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Content="Clock Out" Command="{Binding ClockOutCommand}"></Button>
                     <Button Grid.Column="0" Content="Change Task" Command="{Binding ChangeTaskCommand}"></Button>
+                    <Button Grid.Column="1" Content="Clock Out" Command="{Binding ClockOutCommand}"></Button>
                 </Grid>
                 <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="True" ItemsSource="{Binding TimeEntries}" Height="190"></DataGrid>
-                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource HeaderLabel}" Content="{Binding TotalElapsed}"></Label>
-                <Button Grid.Row="3" Grid.Column="2" Content="Close" Command="{Binding CloseCommand}"></Button>
+                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Style="{StaticResource HeaderLabel}" Content="{Binding TotalElapsed}"></Label>
+                <Button Grid.Row="3" Grid.Column="2" Content="Reports" Command="{Binding ReportsCommand}"></Button>
+                <Button Grid.Row="4" Grid.Column="2" Content="Close" Command="{Binding CloseCommand}"></Button>
             </Grid>
         </Grid>
     </Grid>

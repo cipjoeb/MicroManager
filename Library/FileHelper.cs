@@ -9,7 +9,19 @@ namespace Library
 {
     public class FileHelper
     {
-        private readonly string _path = string.Format("{0}\\MicroManager", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
+        public static string GetPath()
+        {
+            return string.Format("{0}\\MicroManager", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
+        }
+
+        public static bool WriteFile(List<string> lines, string fileName)
+        {
+            var theFile = string.Format("{0}\\{1}", GetPath(), fileName);
+            if (File.Exists(theFile))
+                File.Delete(theFile);
+            File.WriteAllLines(theFile, lines);
+            return true;
+        }
 
         public bool WriteEntries(ObservableCollection<TimeEntry> entries)
         {
@@ -22,10 +34,10 @@ namespace Library
             return true;
         }
 
-        public List<TimeEntry> GetEntries()
+        public List<TimeEntry> GetEntries(string fileName = null)
         {
             CheckDirectory();
-            var theFile = GetFileName();
+            var theFile = string.IsNullOrWhiteSpace(fileName) ? GetFileName() : fileName;
             if (!File.Exists(theFile)) return null;
             var lines = File.ReadAllLines(theFile);
             var serializer = new JavaScriptSerializer();
@@ -38,15 +50,16 @@ namespace Library
             return theList;
         }
 
-        private string GetFileName()
+        private static string GetFileName()
         {
-            return string.Format("{0}\\{1}.txt", _path, DateTime.Now.ToString("yyyy-MM-dd"));
+            return string.Format("{0}\\{1}.txt", GetPath(), DateTime.Now.ToString("yyyy-MM-dd"));
         }
 
-        private void CheckDirectory()
+        private static void CheckDirectory()
         {
-            if (!Directory.Exists(_path))
-                Directory.CreateDirectory(_path);
+            var path = GetPath();
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
         }
     }
 }

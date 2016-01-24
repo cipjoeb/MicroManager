@@ -12,6 +12,7 @@ namespace MicroManager.ViewModels
         public ICommand ClockInCommand { get; set; }
         public ICommand ClockOutCommand { get; set; }
         public ICommand ChangeTaskCommand { get; set; }
+        public ICommand ReportsCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public string Description { get; set; }
         public ObservableCollection<TimeEntry> TimeEntries { get; set; }
@@ -24,6 +25,7 @@ namespace MicroManager.ViewModels
             ClockOutCommand = new RelayCommand(() => { });
             CloseCommand = new RelayCommand(() => { });
             ChangeTaskCommand = new RelayCommand(() => { });
+            ReportsCommand = new RelayCommand(() => { });
             Description = string.Empty;
             TimeEntries = new ObservableCollection<TimeEntry>
             {
