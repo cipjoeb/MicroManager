@@ -71,7 +71,7 @@ namespace MicroManager.ViewModels
                     ts.Seconds));
             }
             lines.Add(string.Format("---- Total Time For All Days Selected ---- {0}:{1}:{2} ---------------",
-                runningTotal.Hours, runningTotal.Minutes,
+                (int)runningTotal.TotalHours, runningTotal.Minutes,
                 runningTotal.Seconds));
             return lines;
         }
