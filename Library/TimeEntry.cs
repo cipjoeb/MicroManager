@@ -23,7 +23,7 @@ namespace Library
 
         public override string ToString()
         {
-            return string.Format("{0} - Task: {1} Time Spent: {2}:{3}:{4}", Start.ToShortDateString(), Description, Hours, Minutes, Seconds);
+            return string.Format("{0} - Task: {1} - Time Spent: {2}:{3}:{4}", Start.ToShortDateString(), Description, Hours, Minutes, Seconds);
         }
     }
 }
