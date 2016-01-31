@@ -18,6 +18,7 @@ namespace MicroManager.ViewModels
         public ICommand ChangeTaskCommand { get; set; }
         public ICommand ReportsCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand MinimizeCommand { get; set; }
         public string Description { get; set; }
         public ObservableCollection<TimeEntry> TimeEntries { get; set; }
         public string TotalElapsed { get; set; }
@@ -40,7 +41,7 @@ namespace MicroManager.ViewModels
             }){IsBackground = true}.Start();
         }
 
-        public void Reports()
+        private void Reports()
         {
             var dlg = new ReportsWindow();
             dlg.ShowDialog();

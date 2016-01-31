@@ -67,10 +67,10 @@ namespace MicroManager.ViewModels
                 var seconds = d.Sum(te => te.Seconds);
                 var ts = new TimeSpan(0, hours, minutes, seconds);
                 runningTotal = runningTotal.Add(ts);
-                lines.Add(string.Format("---- Total Time For Day ---- {0}:{1}:{2} ---------------", ts.Hours, ts.Minutes,
+                lines.Add(string.Format("---- Total Time For Day ---- {0}:{1:D2}:{2:D2} ---------------", ts.Hours, ts.Minutes,
                     ts.Seconds));
             }
-            lines.Add(string.Format("---- Total Time For All Days Selected ---- {0}:{1}:{2} ---------------",
+            lines.Add(string.Format("---- Total Time For All Days Selected ---- {0}:{1:D2}:{2:D2} ---------------",
                 (runningTotal.Days * 24 + runningTotal.Hours), runningTotal.Minutes,
                 runningTotal.Seconds));
             return lines;

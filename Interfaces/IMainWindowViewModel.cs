@@ -14,6 +14,7 @@ namespace Interfaces
         string Description { get; set; }
         ObservableCollection<TimeEntry> TimeEntries { get; set; }
         string TotalElapsed { get; set; }
+        ICommand MinimizeCommand { get; set; }
         void Save();
     }
 }

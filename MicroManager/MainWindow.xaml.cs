@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Interfaces;
 using MicroManager.ViewModels;
@@ -17,6 +18,10 @@ namespace MicroManager
             {
                 ViewModel.Save();
                 Close();
+            });
+            ViewModel.MinimizeCommand = new RelayCommand(() =>
+            {
+                WindowState = WindowState.Minimized;
             });
         }
 
