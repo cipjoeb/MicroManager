@@ -18,7 +18,9 @@ namespace MicroManager.ViewModels
         public ICommand ChangeTaskCommand { get; set; }
         public ICommand ReportsCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand SettingsCommand { get; set; }
         public ICommand MinimizeCommand { get; set; }
+        public Settings Settings { get; set; }
         public string Description { get; set; }
         public ObservableCollection<TimeEntry> TimeEntries { get; set; }
         public string TotalElapsed { get; set; }
@@ -28,9 +30,11 @@ namespace MicroManager.ViewModels
 
         public MainWindowViewModel()
         {
+            Settings = Settings.Instance;
             _fileHelper = new FileHelper();
             ClockInCommand = new RelayCommand(ClockIn);
             ReportsCommand = new RelayCommand(Reports);
+            SettingsCommand = new RelayCommand(ShowSettings);
             TimeEntries = new ObservableCollection<TimeEntry>();
             new Thread(() =>
             {
@@ -41,7 +45,13 @@ namespace MicroManager.ViewModels
             }){IsBackground = true}.Start();
         }
 
-        private void Reports()
+        private static void ShowSettings()
+        {
+            var dlg = new UserSettings();
+            dlg.ShowDialog();
+        }
+
+        private static void Reports()
         {
             var dlg = new ReportsWindow();
             dlg.ShowDialog();

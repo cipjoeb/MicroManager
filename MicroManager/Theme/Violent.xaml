@@ -2,40 +2,42 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:MicroManager.Converters">
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <SolidColorBrush x:Key="ForegroundBrush" Color="Red"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="Black"></SolidColorBrush>
     <Style TargetType="{x:Type Control}" x:Key="GlobalFontStyle">
         <Setter Property="FontFamily" Value="Times New Roman" />
     </Style>
     <Style TargetType="DataGrid">
-        <Setter Property="Background" Value="Black"></Setter>
-        <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
     </Style>
     <Style TargetType="DataGridCell">
-        <Setter Property="Background" Value="Black"></Setter>
-        <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
         <Setter Property="BorderBrush" Value="White"></Setter>
     </Style>
     <Style TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="Black"></Setter>
-        <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
         <Setter Property="BorderBrush" Value="White"></Setter>
     </Style>
     <Style TargetType="DataGridRow">
-        <Setter Property="Background" Value="Black"></Setter>
-        <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
     </Style>
     <Style TargetType="DataGridRowHeader">
-        <Setter Property="Background" Value="Black"></Setter>
-        <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
     </Style>
     <Style TargetType="Grid">
-        <Setter Property="Background" Value="Black"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
     </Style>
     <Style TargetType="TextBox">
-        <Setter Property="Background" Value="Black"></Setter>
-        <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
     </Style>
     <Style TargetType="{x:Type ContentControl}" x:Key="GlobalControlStyle" BasedOn="{StaticResource GlobalFontStyle}">
-        <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
     </Style>
     <Style x:Key="HeaderLabel" TargetType="{x:Type Label}" BasedOn="{StaticResource GlobalControlStyle}">
         <Setter Property="FontWeight" Value="Bold"></Setter>
@@ -43,12 +45,14 @@
     </Style>
     <Style TargetType="Button" BasedOn="{StaticResource GlobalControlStyle}">
         <Setter Property="Visibility" Value="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}" />
-        <Setter Property="Background" Value="Black"></Setter>
-        <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
         <Setter Property="Margin" Value="0,0,10,0" />
         <Setter Property="Width" Value="130" />
         <Setter Property="Height" Value="40" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
     </Style>
 </ResourceDictionary>

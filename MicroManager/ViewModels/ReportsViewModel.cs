@@ -22,6 +22,7 @@ namespace MicroManager.ViewModels
         public ICommand ChooseFilesCommand { get; set; }
         public ICommand PrintReportCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public Settings Settings { get; set; }
 
         public ObservableCollection<string> Files { get; set; }
         public string ReportText { get; set; }
@@ -29,6 +30,7 @@ namespace MicroManager.ViewModels
 
         public ReportsViewModel()
         {
+            Settings = Settings.Instance;
             ChooseFilesCommand = new RelayCommand(ChooseFiles);
             PrintReportCommand = new RelayCommand(PrintReport);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Interfaces;
+using Library;
 
 namespace MicroManager.ViewModels
 {
@@ -9,6 +10,7 @@ namespace MicroManager.ViewModels
         public ICommand ChooseFilesCommand { get; set; }
         public ICommand PrintReportCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public Settings Settings { get; set; }
         public string ReportText { get; set; }
 
         public ReportsDesignTimeViewModel()

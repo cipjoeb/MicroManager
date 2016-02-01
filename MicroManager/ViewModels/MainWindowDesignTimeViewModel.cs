@@ -14,11 +14,13 @@ namespace MicroManager.ViewModels
         public ICommand ChangeTaskCommand { get; set; }
         public ICommand ReportsCommand { get; set; }
         public ICommand CloseCommand { get; set; }
+        public ICommand SettingsCommand { get; set; }
         public ICommand MinimizeCommand { get; set; }
         public string Description { get; set; }
         public ObservableCollection<TimeEntry> TimeEntries { get; set; }
         public string TotalElapsed { get { return "4 Hours 30 Minutes 20 Seconds"; } set{ }}
         public void Save() { }
+        public Settings Settings { get; set; }
 
         public MainWindowDesignTimeViewModel()
         {
@@ -28,6 +30,7 @@ namespace MicroManager.ViewModels
             ChangeTaskCommand = new RelayCommand(() => { });
             ReportsCommand = new RelayCommand(() => { });
             MinimizeCommand = new RelayCommand(() => { });
+            SettingsCommand = new RelayCommand(() => { });
             Description = string.Empty;
             TimeEntries = new ObservableCollection<TimeEntry>
             {

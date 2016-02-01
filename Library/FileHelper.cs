@@ -23,6 +23,24 @@ namespace Library
             return true;
         }
 
+        public static Settings LoadSettings()
+        {
+            CheckDirectory();
+            var theFile = string.Format("{0}\\Settings.txt", GetPath());
+            if (!File.Exists(theFile)) return null;
+            var serializer = new JavaScriptSerializer();
+            return serializer.Deserialize<Settings>(File.ReadAllText(theFile));
+        }
+
+        public static bool SaveSettings(Settings settings)
+        {
+            CheckDirectory();
+            var theFile = string.Format("{0}\\Settings.txt", GetPath());
+            var serializer = new JavaScriptSerializer();
+            File.WriteAllText(theFile, serializer.Serialize(settings));
+            return true;
+        }
+
         public static bool WriteFile(string text, string fileName)
         {
             var theFile = string.Format("{0}\\{1}", GetPath(), fileName);

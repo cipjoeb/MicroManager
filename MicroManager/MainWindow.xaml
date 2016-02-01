@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:designhelpers="clr-namespace:MicroManager.ViewModels"
+        xmlns:microManager="clr-namespace:MicroManager"
         Icon="MicroManagerIcon.ico"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance designhelpers:MainWindowDesignTimeViewModel, IsDesignTimeCreatable=True}"
         Title="Micro Manager" WindowStyle="None" BorderThickness="1" BorderBrush="White" ResizeMode="NoResize" MinHeight="350" MinWidth="550" MouseDown="MainWindow_OnMouseDown" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <ResourceDictionary Source="Theme/Basic.xaml"></ResourceDictionary>
-    </Window.Resources>
+<Window.Resources>
+        <microManager:DesignTimeResourceDictionary DesignTimeSource="pack://application:,,,/MicroManager;component/Theme/Hacker.xaml"></microManager:DesignTimeResourceDictionary>
+</Window.Resources>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -32,19 +33,26 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Style="{StaticResource HeaderLabel}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Content="Description:"></Label>
-                <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbDescription" Text="{Binding Description}" VerticalContentAlignment="Center"></TextBox>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Description}" VerticalContentAlignment="Center"></TextBox>
                 <Grid Grid.Row="0" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Clock In" Command="{Binding ClockInCommand}" CommandParameter="tbDescription.Text"></Button>
+                    <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Clock In" Command="{Binding ClockInCommand}"></Button>
                     <Button Grid.Column="0" Content="Change Task" Command="{Binding ChangeTaskCommand}"></Button>
                     <Button Grid.Column="1" Content="Clock Out" Command="{Binding ClockOutCommand}"></Button>
                 </Grid>
                 <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="True" ItemsSource="{Binding TimeEntries}" Height="190"></DataGrid>
                 <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Style="{StaticResource HeaderLabel}" Content="{Binding TotalElapsed}"></Label>
-                <Button Grid.Row="3" Grid.Column="2" Content="Reports" Command="{Binding ReportsCommand}"></Button>
+                <Grid Grid.Row="3" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Reports" Command="{Binding ReportsCommand}"></Button>
+                    <Button Grid.Column="1" Content="Settings" Command="{Binding SettingsCommand}"></Button>
+                </Grid>
                 <Grid Grid.Row="4" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
