@@ -7,6 +7,10 @@
     <Style TargetType="{x:Type Control}" x:Key="GlobalFontStyle">
         <Setter Property="FontFamily" Value="Times New Roman" />
     </Style>
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
+        <Setter Property="FontFamily" Value="Times New Roman"></Setter>
+    </Style>
     <Style TargetType="DataGrid">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"></Setter>
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
@@ -39,7 +43,9 @@
     <Style TargetType="{x:Type ContentControl}" x:Key="GlobalControlStyle" BasedOn="{StaticResource GlobalFontStyle}">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
     </Style>
-    <Style x:Key="HeaderLabel" TargetType="{x:Type Label}" BasedOn="{StaticResource GlobalControlStyle}">
+    <Style x:Key="HeaderText" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Times New Roman"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
         <Setter Property="FontWeight" Value="Bold"></Setter>
         <Setter Property="FontSize" Value="18"></Setter>
     </Style>
@@ -54,5 +60,8 @@
     </Style>
     <Style TargetType="Label">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"></Setter>
+    </Style>
+    <Style TargetType="ComboBox">
+        <Setter Property="Background" Value="Black"></Setter>
     </Style>
 </ResourceDictionary>

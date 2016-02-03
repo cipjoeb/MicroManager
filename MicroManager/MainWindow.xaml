@@ -18,7 +18,7 @@
                <RowDefinition Height="Auto"></RowDefinition>
                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label HorizontalAlignment="Center" Grid.Row="0" Style="{StaticResource HeaderLabel}" Content="Welcome to Micro Manager!"></Label>
+            <TextBlock HorizontalAlignment="Center" Grid.Row="0" Style="{DynamicResource HeaderText}">Welcome to Micro Manager!</TextBlock>
             <Grid Grid.Row="1" Margin="0,20,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -32,7 +32,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Style="{StaticResource HeaderLabel}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Content="Description:"></Label>
+                <TextBlock Style="{DynamicResource HeaderText}" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Description:</TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Description}" VerticalContentAlignment="Center"></TextBox>
                 <Grid Grid.Row="0" Grid.Column="2">
                     <Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
                     <Button Grid.Column="1" Content="Clock Out" Command="{Binding ClockOutCommand}"></Button>
                 </Grid>
                 <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="True" ItemsSource="{Binding TimeEntries}" Height="190"></DataGrid>
-                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Style="{StaticResource HeaderLabel}" Content="{Binding TotalElapsed}"></Label>
+                <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Style="{DynamicResource HeaderText}" Text="{Binding TotalElapsed}"></TextBlock>
                 <Grid Grid.Row="3" Grid.Column="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>

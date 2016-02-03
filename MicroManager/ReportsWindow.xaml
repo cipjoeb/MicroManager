@@ -18,7 +18,7 @@
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Style="{StaticResource HeaderLabel}" Content="Reporting" HorizontalContentAlignment="Center"></Label>
+        <TextBlock Style="{DynamicResource HeaderText}" HorizontalAlignment="Center">Reporting</TextBlock>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>

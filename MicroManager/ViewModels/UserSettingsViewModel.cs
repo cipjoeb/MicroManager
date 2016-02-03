@@ -19,9 +19,10 @@ namespace MicroManager.ViewModels
                 Settings.Theme = value;
                 var app = (App) Application.Current;
                 app.ChangeTheme(Settings.Theme);
-                foreach (var window in app.Windows)
+                foreach (Window window in app.Windows)
                 {
-                    ((Window)window).UpdateLayout();
+                    window.InvalidateVisual();
+                    window.UpdateLayout();
                 }
             }
         }

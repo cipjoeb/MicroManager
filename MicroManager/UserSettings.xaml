@@ -8,7 +8,7 @@
         Icon="MicroManagerIcon.ico"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance designhelpers:UserSettingsDesignTimeViewModel, IsDesignTimeCreatable=True}"
-        Title="UserSettings" WindowStyle="None" ResizeMode="NoResize" Height="300" Width="500" BorderBrush="White" BorderThickness="1" MouseDown="UserSettings_OnMouseDown">
+        Title="UserSettings" WindowStyle="None" ResizeMode="NoResize" Height="300" Width="500" BorderBrush="White" BorderThickness="1" MouseDown="UserSettings_OnMouseDown" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <microManager:DesignTimeResourceDictionary DesignTimeSource="pack://application:,,,/MicroManager;component/Theme/Hacker.xaml"></microManager:DesignTimeResourceDictionary>
     </Window.Resources>
@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label HorizontalAlignment="Center" Style="{StaticResource HeaderLabel}" Content="Settings"></Label>
+        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource HeaderText}">Settings</TextBlock>
         <Grid Grid.Row="1" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
