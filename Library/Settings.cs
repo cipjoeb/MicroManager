@@ -6,7 +6,7 @@ namespace Library
     public class Settings
     {
         public string Theme { get; set; }
-        private readonly List<string> _availableThemes = new List<string> {"Hacker", "Violent"}; 
+        private readonly List<string> _availableThemes = new List<string> {"Hacker", "Violent", "HackNet", "BSOD"}; 
 
         public List<string> AvailableThemes
         {
