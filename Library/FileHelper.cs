@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Web.Script.Serialization;
@@ -48,7 +47,7 @@ namespace Library
             return true;
         }
 
-        public bool WriteEntries(ObservableCollection<TimeEntry> entries)
+        public bool WriteEntries(ICollection<TimeEntry> entries)
         {
             CheckDirectory();
             var theFile = GetFileName();

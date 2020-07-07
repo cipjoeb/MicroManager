@@ -7,7 +7,7 @@ using PropertyChanged;
 
 namespace MicroManager.ViewModels
 {
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class UserSettingsViewModel : IUserSettingsViewModel
     {
         public Settings Settings { get; set; }

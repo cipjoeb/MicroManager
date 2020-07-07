@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -6,12 +7,10 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Interfaces;
 using Library;
-using PropertyChanged;
 
 namespace MicroManager.ViewModels
 {
-    [ImplementPropertyChanged]
-    public class MainWindowViewModel : IMainWindowViewModel
+    public class MainWindowViewModel : BasePropertyChanged, IMainWindowViewModel
     {
         public ICommand ClockInCommand { get; set; }
         public ICommand ClockOutCommand { get; set; }
@@ -39,8 +38,7 @@ namespace MicroManager.ViewModels
             new Thread(() =>
             {
                 var entries = _fileHelper.GetEntries();
-                if (entries != null)
-                    entries.ForEach(e => TimeEntries.Add(e));
+                entries?.ForEach(e => TimeEntries.Add(e));
                 SetElapsed();
             }){IsBackground = true}.Start();
         }
@@ -74,6 +72,7 @@ namespace MicroManager.ViewModels
             };
             ChangeTaskCommand = new RelayCommand(ChangeTask);
             ClockOutCommand = new RelayCommand(ClockOut);
+            PropertiesChanged(new List<string>{ nameof(ChangeTaskCommand), nameof(ClockOutCommand), nameof(ClockInCommand)});
         }
 
         private void ClockOut()
@@ -85,6 +84,7 @@ namespace MicroManager.ViewModels
             TimeEntries.Add(_entry);
             SetElapsed();
             _entry = null;
+            PropertiesChanged(new List<string>{ nameof(ClockOutCommand), nameof(ChangeTaskCommand), nameof(ClockInCommand), nameof(TimeEntries)});
         }
 
         private void ChangeTask()
@@ -97,7 +97,8 @@ namespace MicroManager.ViewModels
         {
             var ts = new TimeSpan(0, 0, 0, 0);
             ts = TimeEntries.Aggregate(ts, (current, e) => current.Add(e.Elapsed));
-            TotalElapsed =  string.Format("{0} Hours {1} Minutes {2} Seconds", ts.Hours, ts.Minutes, ts.Seconds);
+            TotalElapsed = $"{ts.Hours} Hours {ts.Minutes} Minutes {ts.Seconds} Seconds";
+            OnPropertyChanged(nameof(TotalElapsed));
         }
     }
 }

@@ -16,8 +16,8 @@ using Path = System.IO.Path;
 
 namespace MicroManager.ViewModels
 {
-    [ImplementPropertyChanged]
-    public class ReportsViewModel : IReportsViewModel
+    [AddINotifyPropertyChangedInterface]
+    public class ReportsViewModel : BasePropertyChanged, IReportsViewModel
     {
         public ICommand ChooseFilesCommand { get; set; }
         public ICommand PrintReportCommand { get; set; }
@@ -52,6 +52,7 @@ namespace MicroManager.ViewModels
             }
             _reportLines = GenerateReport();
             ReportText = string.Join(Environment.NewLine, _reportLines);
+            OnPropertyChanged(nameof(ReportText));
         }
 
         private List<string> GenerateReport()
@@ -69,12 +70,9 @@ namespace MicroManager.ViewModels
                 var seconds = d.Sum(te => te.Seconds);
                 var ts = new TimeSpan(0, hours, minutes, seconds);
                 runningTotal = runningTotal.Add(ts);
-                lines.Add(string.Format("---- Total Time For Day ---- {0}:{1:D2}:{2:D2} ---------------", ts.Hours, ts.Minutes,
-                    ts.Seconds));
+                lines.Add($"---- Total Time For Day ---- {ts.Hours}:{ts.Minutes:D2}:{ts.Seconds:D2} ---------------");
             }
-            lines.Add(string.Format("---- Total Time For All Days Selected ---- {0}:{1:D2}:{2:D2} ---------------",
-                (runningTotal.Days * 24 + runningTotal.Hours), runningTotal.Minutes,
-                runningTotal.Seconds));
+            lines.Add($"---- Total Time For All Days Selected ---- {(runningTotal.Days * 24 + runningTotal.Hours)}:{runningTotal.Minutes:D2}:{runningTotal.Seconds:D2} ---------------");
             return lines;
         }
 
@@ -84,9 +82,9 @@ namespace MicroManager.ViewModels
             var printDialog = new PrintDialog();
             var result = printDialog.ShowDialog();
             if (!result.Value) return;
-            var reportFile = string.Format("{0}-Report.txt", DateTime.Now.ToString("yyyy-MM-dd"));
+            var reportFile = $"{DateTime.Now:yyyy-MM-dd}-Report.txt";
             FileHelper.WriteFile(ReportText, reportFile);
-            PrintReportFile(string.Format("{0}\\{1}", FileHelper.GetPath(), reportFile));
+            PrintReportFile($"{FileHelper.GetPath()}\\{reportFile}");
         }
 
         //Modified from source provided at http://stackoverflow.com/questions/18287153/printing-a-note-pad-text-file
@@ -98,16 +96,15 @@ namespace MicroManager.ViewModels
                 var pd = new PrintDocument { DocumentName = Path.GetFileName(file) };
                 pd.PrintPage += (sender, args) =>
                 {
-                    float linesPerPage = 0;
                     var count = 0;
                     float topMargin = args.MarginBounds.Top;
                     string line = null;
 
                     // Calculate the number of lines per page.
-                    linesPerPage = args.MarginBounds.Height / printFont.GetHeight(args.Graphics);
+                    var linesPerPage = args.MarginBounds.Height / printFont.GetHeight(args.Graphics);
 
                     // Print each line of the file. 
-                    while (count < linesPerPage && ((line = sr.ReadLine()) != null))
+                    while (count < linesPerPage && (line = sr.ReadLine()) != null)
                     {
                         var yPos = topMargin + (count * printFont.GetHeight(args.Graphics));
                         args.Graphics.DrawString(line, printFont, Brushes.Black, 10.0f, yPos, new StringFormat());
